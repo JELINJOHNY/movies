@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<form enctype="multipart/form-data" action="" method="post" class="p-3 shadow">
+    {% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" class="form-control" id="name"  placeholder=" enter the name">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" name="description" class="form-control" id="description" placeholder=" enter the description">
+      <div class="form-group">
+    <label for="year">Year</label>
+    <input type="date" name="year" class="form-control" id="year" placeholder=" enter the year">
+       <div class="form-group">
+         <input type="file" name="img" class="form-control" id="img">
+       </div>
+  </div>
+  <input type="submit">
+</form>
+
+  </div>
+    <div class="row">
+    <div class="col-6">
+
+      {% for i in task1 %}
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{i.name}}</h5>
+        <p><b>{{i.description}}</b></p>
+          <p><b>{{i.year}}</b></p>
+        <p><b><img src="{{i.img.url}}" width="500" height="500"></b></p>
+          <a class="btn btn-success" href="{% url 'update' i.id %}">Update</a>
+          <a class="btn btn-danger" href="{% url 'delete' i.id %}">Delete</a>
+
+      </div>
+    </div>
+    </br>
+      {% endfor %}
+  </div>
+    </div>
+{% endblock %}
